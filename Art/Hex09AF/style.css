@@ -1,0 +1,150 @@
+:root {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --shadow-color: white;
+    --square-size: 50px;
+
+    --primary-purple: #4242fc;
+    --primary-red: #b63020;
+
+    --shadow-size: 5px;
+    --border-radius: 4px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* === CONTAINER === */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container>div {
+    margin: 20px;
+}
+
+/* === SHAPE === */
+.shape {
+    display: grid;
+    gap: 5px;
+}
+
+.l-shape {
+    width: calc(var(--square-size) * 2);
+    height: calc(var(--square-size) * 3);
+    grid-template-areas:
+        'square1 .'
+        'square2 .'
+        'square3 square4';
+}
+
+.l-shape.reverse {
+    grid-template-areas:
+        '. square1'
+        '. square2'
+        'square3 square4';
+}
+
+.z-shape {
+    width: calc(var(--square-size) * 3);
+    height: calc(var(--square-size) * 2);
+    grid-template-areas:
+        '. square1 square2'
+        'square3 square4 .'
+}
+
+.z-shape.reverse {
+    grid-template-areas:
+        'square1 square2 .'
+        '. square3 square4'
+}
+
+.o-shape {
+    width: calc(var(--square-size) * 2);
+    height: calc(var(--square-size) * 2);
+    grid-template-areas:
+        'square1 square2'
+        'square3 square4'
+}
+
+.i-shape {
+    width: calc(var(--square-size) * 4);
+    height: calc(var(--square-size) * 1);
+    grid-template-areas:
+        'square1 square2 square3 square4'
+}
+
+/* === SQUARE === */
+.square1 {
+    grid-area: square1;
+}
+
+.square2 {
+    grid-area: square2;
+}
+
+.square3 {
+    grid-area: square3;
+}
+
+.square4 {
+    grid-area: square4;
+}
+
+.square {
+    position: relative;
+    border-radius: var(--border-radius);
+    width: var(--square-size);
+    height: var(--square-size);
+    background-color: var(--primary-purple);
+}
+
+/* === SQUARE SHADOW === */
+.shadow {
+    border-top-left-radius: var(--border-radius);
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: var(--shadow-size);
+    width: var(--shadow-size);
+    background-color: var(--shadow-color);
+}
+
+.shadow::before,
+.shadow::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    transform: translate(100%, 100%);
+    background-color: var(--shadow-color);
+}
+
+.shadow::before {
+    height: calc(var(--shadow-size));
+    width: calc(var(--shadow-size) * 2);
+}
+
+.shadow::after {
+    height: calc(var(--shadow-size) * 2);
+    width: calc(var(--shadow-size));
+}
+
+.shape.reverse .square {
+    background-color: var(--primary-red);
+}
+
+.o-shape .square,
+.i-shape .square {
+    padding: 5px;
+    background-image: linear-gradient(white, white),
+        linear-gradient(var(--primary-purple), var(--primary-purple));
+    background-clip: content-box, padding-box;
+}
