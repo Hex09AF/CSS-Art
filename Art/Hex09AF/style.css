@@ -8,7 +8,13 @@
     --primary-red: #b63020;
 
     --shadow-size: 5px;
-    --border-radius: 4px;
+    --border-radius: 5px;
+    --square-gap: 2px;
+
+    --no-columns: 10;
+    --no-rows: 10;
+
+    --border-container-width: 4px;
 }
 
 * {
@@ -16,24 +22,113 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    padding: 10px;
+    background-color: #3f3f3f;
     color: var(--text-color);
 }
 
 /* === CONTAINER === */
 .container {
-    display: flex;
-    flex-wrap: wrap;
+    display: inline-grid;
+    grid-template-columns: repeat(var(--no-columns), var(--square-size));
+    grid-template-rows: repeat(var(--no-rows), var(--square-size));
+    z-index: 3;
+    position: relative;
 }
 
-.container>div {
-    margin: 20px;
+.container {
+    border: var(--border-container-width) solid #bbece3;
+    background-color: var(--bg-color)
+}
+
+.ga-8-1 {
+    grid-area: 8/1/8/1 !important;
+}
+
+.ga-7-2 {
+    grid-area: 7/2/7/2 !important;
+}
+
+.ga-9-3 {
+    grid-area: 9/3/9/3 !important;
+}
+
+.ga-9-6 {
+    grid-area: 9/6/9/6 !important;
+}
+
+.ga-7-5 {
+    grid-area: 7/5/7/5 !important;
+}
+
+.ga-6-1 {
+    grid-area: 6/1/6/1 !important;
+}
+
+.ga-9-8 {
+    grid-area: 9/8/9/8;
+    animation-name: lastmove;
+    animation-duration: 6s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes lastmove {
+    0% {
+        grid-area: 0/8/0/8;
+    }
+
+    11% {
+        grid-area: 1/7/1/7;
+    }
+
+    22% {
+        grid-area: 2/8/2/8;
+    }
+
+    25% {
+        grid-area: 2/7/2/7;
+    }
+
+    28% {
+        grid-area: 2/6/2/6;
+    }
+
+    31% {
+        grid-area: 3/7/3/7;
+    }
+
+    33% {
+        grid-area: 3/8/3/8;
+    }
+
+    44% {
+        grid-area: 4/8/4/8;
+    }
+
+    55% {
+        grid-area: 5/8/5/8;
+    }
+
+    66% {
+        grid-area: 6/8/6/8;
+    }
+
+    77% {
+        grid-area: 7/8/7/8;
+    }
+
+    88% {
+        grid-area: 8/8/8/8;
+    }
+
+    99% {
+        grid-area: 9/8/9/8;
+    }
 }
 
 /* === SHAPE === */
 .shape {
     display: grid;
-    gap: 5px;
 }
 
 .l-shape {
@@ -99,6 +194,7 @@ body {
 }
 
 .square {
+    border: var(--square-gap) solid black;
     position: relative;
     border-radius: var(--border-radius);
     width: var(--square-size);
@@ -147,4 +243,62 @@ body {
     background-image: linear-gradient(white, white),
         linear-gradient(var(--primary-purple), var(--primary-purple));
     background-clip: content-box, padding-box;
+}
+
+/* === FRAME === */
+.frame {
+    display: inline-block;
+    position: relative;
+}
+
+.frame::before,
+.frame::after {
+    position: absolute;
+    content: "";
+    z-index: 2;
+    background: var(--bg-color);
+}
+
+.frame::before {
+    width: calc(100% + 2 * var(--border-container-width));
+    height: 100%;
+    top: 0;
+    left: calc(-1 * var(--border-container-width));
+}
+
+.frame::after {
+    height: calc(100% + 2 * var(--border-container-width));
+    width: 100%;
+    left: 0;
+    top: calc(-1 * var(--border-container-width));
+}
+
+/* FRAME FRAME */
+.frame-frame {
+    display: inline-block;
+    position: relative;
+    background: blue;
+    padding: var(--border-container-width);
+}
+
+.frame-frame::before,
+.frame-frame::after {
+    position: absolute;
+    content: "";
+    z-index: 1;
+    background: #747377;
+}
+
+.frame-frame::before {
+    width: calc(100% + 2 * var(--border-container-width));
+    height: 100%;
+    top: 0;
+    left: calc(-1 * var(--border-container-width));
+}
+
+.frame-frame::after {
+    height: calc(100% + 2 * var(--border-container-width));
+    width: 100%;
+    left: 0;
+    top: calc(-1 * var(--border-container-width));
 }
